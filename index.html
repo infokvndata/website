@@ -1,3 +1,24 @@
+<?php 
+  if(isset($_REQUEST['user_email']) && trim($_REQUEST['user_email']) != ''){
+
+      $mailContent = '';	  
+	  $mailContent.='<br/><b>Name : </b>'.$_REQUEST['name'];
+	  $mailContent.='<br/><b>Email : </b>'.$_REQUEST['user_email'];
+	  $mailContent.='<br/><b>Subject : </b>'.$_REQUEST['sub'];
+	  $mailContent.='<br/><b>Message : </b>'.$_REQUEST['msg'];
+	  
+     $to      = 'infokvndata@gmail.com';
+     $subject = 'New inquiry from site';
+     $message = $mailContent;
+     $headers = 'From: infokvndata@gmail.com' . "\r\n" .
+    'Reply-To: infokvndata@gmail.com' . "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
+     if(mail($to, $subject, $message, $headers)){
+		      		
+	 } 
+     
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,8 +28,73 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>HTML Template</title>
+	<title>KVN Infotech</title>
+<style>
 
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.header-title{
+	font-size:2.5em;
+}
+.choose-slide-image{
+	 height:450px;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+
+@media only screen and (max-width: 600px) {
+  #home{
+	 height:270px !important; 
+  }
+  .bg-img{
+	  background-size: 100% 100% !important; 
+  }
+  .header-title{
+	font-size:1.6em !important;  
+	padding-top:40px;	
+  }
+  .choose-slide-image{
+	 height:250px !important; 
+  }
+}
+</style>
+	
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet">
 
@@ -40,23 +126,47 @@
 	<!-- Header -->
 	<header id="home">
 		<!-- Background Image -->
-		<div class="bg-img" style="background-image: url('./img/background1.jpg');">
-			<div class="overlay"></div>
+		<div >
+			<a class="prev" style="z-index:1111 !important;" onclick="plusSlides(-1)">&#10094;</a>
+			<a class="next" style="z-index:1111 !important;" onclick="plusSlides(1)">&#10095;</a>
 		</div>
-		<!-- /Background Image -->
-
+		<div class="">
+		
+		    <div class="bg-img mySlides " style="background-image: url('./img/main_slide1.jpg');background-size: 100%;
+    background-repeat: no-repeat;">
+				<div class="overlay"></div>
+			</div>
+			<div class="bg-img mySlides " style="background-image: url('./img/all_device.png');background-size: 100%;
+    background-repeat: no-repeat;">
+				<div class="overlay"></div>
+			</div>
+			<!--
+			<div class="bg-img mySlides " style="background-image: url('./img/web_laptop.jpg');">
+				<div class="overlay"></div>
+			</div>
+			-->  
+			<div class="bg-img mySlides " style="background-image: url('./img/background2.jpg');background-size: 100%;
+    background-repeat: no-repeat;">
+				<div class="overlay"></div>
+			</div>
+		</div>
 		<!-- Nav -->
 		<nav id="nav" class="navbar nav-transparent">
 			<div class="container">
 
 				<div class="navbar-header">
 					<!-- Logo -->
-					<div class="navbar-brand">
-						<a href="index.html">
-							<img class="logo" src="img/logo.png" alt="logo">
-							<img class="logo-alt" src="img/logo-alt.png" alt="logo">
+					<div class="navbar-brand" style="padding-top:17px;">
+						<a href="" style="font-size:30px;">
+							<!-- <img class="logo" src="img/earth-png.png" alt="logo" style="width:23px;margin-top: -4px;margin-right: 5px;" /> -->
+							<div style="float:left;"><i class="fa fa-globe" style="margin-top:-2px;font-size: 23px;margin-right:5px;"></i></div>
+							<div style="float:left;margin-top:3px;">KVN Infotech</div>
+							<div style="clear:both;"></div>
+							<!-- <img class="logo-alt" src="img/logo-alt.png" alt="logo"> -->
+							
 						</a>
 					</div>
+					
 					<!-- /Logo -->
 
 					<!-- Collapse nav button -->
@@ -72,13 +182,8 @@
 					<li><a href="#about">About</a></li>
 					<li><a href="#portfolio">Portfolio</a></li>
 					<li><a href="#service">Services</a></li>
-					<li><a href="#pricing">Prices</a></li>
-					<li><a href="#team">Team</a></li>
-					<li class="has-dropdown"><a href="#blog">Blog</a>
-						<ul class="dropdown">
-							<li><a href="blog-single.html">blog post</a></li>
-						</ul>
-					</li>
+					<li><a href="#team">Platforms</a></li> 
+					<li><a href="#testimonial">Testimonial</a></li>
 					<li><a href="#contact">Contact</a></li>
 				</ul>
 				<!-- /Main navigation -->
@@ -95,11 +200,9 @@
 					<!-- home content -->
 					<div class="col-md-10 col-md-offset-1">
 						<div class="home-content">
-							<h1 class="white-text">We Are Creative Agency</h1>
-							<p class="white-text">Morbi mattis felis at nunc. Duis viverra diam non justo. In nisl. Nullam sit amet magna in magna gravida vehicula. Mauris tincidunt sem sed arcu. Nunc posuere.
-							</p>
-							<button class="white-btn">Get Started!</button>
-							<button class="main-btn">Learn more</button>
+							<h1 class="white-text header-title" style="">If you can think it, we can built it</h1>
+							<p class="white-text">Consider | Shape | Influence | Shine</p>
+							
 						</div>
 					</div>
 					<!-- /home content -->
@@ -132,8 +235,7 @@
 					<div class="about">
 						<i class="fa fa-cogs"></i>
 						<h3>Fully Customizible</h3>
-						<p>Maecenas tempus tellus eget condimentum rhoncus sem quam semper libero sit amet.</p>
-						<a href="#">Read more</a>
+						<p>Even if you know nothing about website design, no problem we can build everything for you</p>
 					</div>
 				</div>
 				<!-- /about -->
@@ -143,8 +245,7 @@
 					<div class="about">
 						<i class="fa fa-magic"></i>
 						<h3>Awesome Features</h3>
-						<p>Maecenas tempus tellus eget condimentum rhoncus sem quam semper libero sit amet.</p>
-						<a href="#">Read more</a>
+						<p>We can build your business website and grow your business online with Awesome Features</p>
 					</div>
 				</div>
 				<!-- /about -->
@@ -154,9 +255,8 @@
 					<div class="about">
 						<i class="fa fa-mobile"></i>
 						<h3>Fully Responsive</h3>
-						<p>Maecenas tempus tellus eget condimentum rhoncus sem quam semper libero sit amet.</p>
-						<a href="#">Read more</a>
-					</div>
+						<p>Automatically resize, hide, shrink, or enlarge a website in all devices (desktops, tablets, and phones)</p>
+					</div> 
 				</div>
 				<!-- /about -->
 
@@ -169,7 +269,7 @@
 	</div>
 	<!-- /About -->
 
-
+ 
 	<!-- Portfolio -->
 	<div id="portfolio" class="section md-padding bg-grey">
 
@@ -187,14 +287,14 @@
 
 				<!-- Work -->
 				<div class="col-md-4 col-xs-6 work">
-					<img class="img-responsive" src="./img/work1.jpg" alt="">
+					<img class="img-responsive" src="./img/featured_work_1.jpg" alt="" style="height:232px;box-shadow:5px 5px 5px #999;" />
 					<div class="overlay"></div>
 					<div class="work-content">
-						<span>Category</span>
-						<h3>Lorem ipsum dolor</h3>
+						<span>Web Development</span>
+						<h3>Mobile Responsive</h3>
 						<div class="work-link">
-							<a href="#"><i class="fa fa-external-link"></i></a>
-							<a class="lightbox" href="./img/work1.jpg"><i class="fa fa-search"></i></a>
+							<!-- <a href="#"><i class="fa fa-external-link"></i></a> -->  
+							<a class="lightbox" href="./img/featured_work_1_bk.jpg"><i class="fa fa-search"></i></a>
 						</div>
 					</div>
 				</div>
@@ -202,14 +302,14 @@
 
 				<!-- Work -->
 				<div class="col-md-4 col-xs-6 work">
-					<img class="img-responsive" src="./img/work2.jpg" alt="">
+					<img class="img-responsive" src="./img/featured_work_2.jpg" alt="" style="height:232px;box-shadow:5px 5px 5px #999;" />
 					<div class="overlay"></div>
 					<div class="work-content">
-						<span>Category</span>
-						<h3>Lorem ipsum dolor</h3>
+						<span>Software Development</span>
+						<h3>System Analysis</h3>
 						<div class="work-link">
-							<a href="#"><i class="fa fa-external-link"></i></a>
-							<a class="lightbox" href="./img/work2.jpg"><i class="fa fa-search"></i></a>
+							<!-- <a href="#"><i class="fa fa-external-link"></i></a> -->
+							<a class="lightbox" href="./img/featured_work_2_bk.jpg"><i class="fa fa-search"></i></a>
 						</div>
 					</div>
 				</div>
@@ -217,14 +317,14 @@
 
 				<!-- Work -->
 				<div class="col-md-4 col-xs-6 work">
-					<img class="img-responsive" src="./img/work3.jpg" alt="">
+					<img class="img-responsive" src="./img/featured_work_3.jpg" alt="" style="height:232px;box-shadow:5px 5px 5px #999;" />
 					<div class="overlay"></div>
 					<div class="work-content">
-						<span>Category</span>
-						<h3>Lorem ipsum dolor</h3>
+						<span>Email Themes</span>
+						<h3>Email Reponsive Template</h3>
 						<div class="work-link">
-							<a href="#"><i class="fa fa-external-link"></i></a>
-							<a class="lightbox" href="./img/work3.jpg"><i class="fa fa-search"></i></a>
+							<!-- <a href="#"><i class="fa fa-external-link"></i></a> -->    
+							<a class="lightbox" href="./img/featured_work_3_bk.jpg"><i class="fa fa-search"></i></a>
 						</div>
 					</div>
 				</div>
@@ -232,14 +332,14 @@
 
 				<!-- Work -->
 				<div class="col-md-4 col-xs-6 work">
-					<img class="img-responsive" src="./img/work4.jpg" alt="">
+					<img class="img-responsive" src="./img/featured_work_4.jpg" alt="" style="box-shadow:5px 5px 5px #999;">
 					<div class="overlay"></div>
 					<div class="work-content">
-						<span>Category</span>
-						<h3>Lorem ipsum dolor</h3>
+						<span>Reports</span>
+						<h3>Business Statistics</h3>
 						<div class="work-link">
-							<a href="#"><i class="fa fa-external-link"></i></a>
-							<a class="lightbox" href="./img/work4.jpg"><i class="fa fa-search"></i></a>
+							<!-- <a href="#"><i class="fa fa-external-link"></i></a> -->
+							<a class="lightbox" href="./img/featured_work_4_bk.jpg"><i class="fa fa-search"></i></a>  
 						</div>
 					</div>
 				</div>
@@ -247,14 +347,14 @@
 
 				<!-- Work -->
 				<div class="col-md-4 col-xs-6 work">
-					<img class="img-responsive" src="./img/work5.jpg" alt="">
+					<img class="img-responsive" src="./img/featured_work_5.jpg" alt="" style='width:400px;height:232px;box-shadow:5px 5px 5px #999;'>
 					<div class="overlay"></div>
 					<div class="work-content">
-						<span>Category</span>
-						<h3>Lorem ipsum dolor</h3>
+						<span>Fashion</span>
+						<h3>Fashion Theme</h3>
 						<div class="work-link">
-							<a href="#"><i class="fa fa-external-link"></i></a>
-							<a class="lightbox" href="./img/work5.jpg"><i class="fa fa-search"></i></a>
+							<!-- <a href="#"><i class="fa fa-external-link"></i></a> --> 
+							<a class="lightbox" href="./img/featured_work_5.jpg"><i class="fa fa-search"></i></a>
 						</div>
 					</div>
 				</div>
@@ -262,14 +362,14 @@
 
 				<!-- Work -->
 				<div class="col-md-4 col-xs-6 work">
-					<img class="img-responsive" src="./img/work6.jpg" alt="">
+					<img class="img-responsive" src="./img/featured_work_6.jpg" alt="" style='width:400px;height:232px;box-shadow:5px 5px 5px #999;'>
 					<div class="overlay"></div>
 					<div class="work-content">
-						<span>Category</span>
-						<h3>Lorem ipsum dolor</h3>
+						<span>Shopping</span>
+						<h3>E Store</h3>
 						<div class="work-link">
-							<a href="#"><i class="fa fa-external-link"></i></a>
-							<a class="lightbox" href="./img/work6.jpg"><i class="fa fa-search"></i></a>
+							<!-- <a href="#"><i class="fa fa-external-link"></i></a> -->
+							<a class="lightbox" href="./img/featured_work_6.jpg"><i class="fa fa-search"></i></a>
 						</div>
 					</div>
 				</div>
@@ -304,7 +404,7 @@
 					<div class="service">
 						<i class="fa fa-diamond"></i>
 						<h3>App Development</h3>
-						<p>Maecenas tempus tellus eget condimentum rhoncus sem quam semper libero.</p>
+						<p>We are a web app design and development and working for brands across the globe.</p>
 					</div>
 				</div>
 				<!-- /service -->
@@ -314,7 +414,7 @@
 					<div class="service">
 						<i class="fa fa-rocket"></i>
 						<h3>Graphic Design</h3>
-						<p>Maecenas tempus tellus eget condimentum rhoncus sem quam semper libero.</p>
+						<p>We can create eye catching pixel perfect html design for your websites.</p>
 					</div>
 				</div>
 				<!-- /service -->
@@ -324,7 +424,7 @@
 					<div class="service">
 						<i class="fa fa-cogs"></i>
 						<h3>Creative Idea</h3>
-						<p>Maecenas tempus tellus eget condimentum rhoncus sem quam semper libero.</p>
+						<p>We can build shine and shape of the sketch of your idea and thoughts </p> 
 					</div>
 				</div>
 				<!-- /service -->
@@ -332,9 +432,9 @@
 				<!-- service -->
 				<div class="col-md-4 col-sm-6">
 					<div class="service">
-						<i class="fa fa-diamond"></i>
-						<h3>Marketing</h3>
-						<p>Maecenas tempus tellus eget condimentum rhoncus sem quam semper libero.</p>
+						<i class="fa fa-globe"></i>
+						<h3>Web Development</h3>
+						<p>Interactive, client-fitting and attractive website for engage and convert your clients</p>
 					</div>
 				</div>
 				<!-- /service -->
@@ -344,7 +444,7 @@
 					<div class="service">
 						<i class="fa fa-pencil"></i>
 						<h3>Awesome Support</h3>
-						<p>Maecenas tempus tellus eget condimentum rhoncus sem quam semper libero.</p>
+						<p>We are trying to give best effectively support 24 * 7 in all our clietns and future clietns also.</p>
 					</div>
 				</div>
 				<!-- /service -->
@@ -353,8 +453,8 @@
 				<div class="col-md-4 col-sm-6">
 					<div class="service">
 						<i class="fa fa-flask"></i>
-						<h3>Brand Design</h3>
-						<p>Maecenas tempus tellus eget condimentum rhoncus sem quam semper libero.</p>
+						<h3>Wordpress Sites</h3>
+						<p>WordPress is the easiest way to create your content websites and grow your busness with new clients</p> 
 					</div>
 				</div>
 				<!-- /service -->
@@ -383,22 +483,26 @@
 					<div class="section-header">
 						<h2 class="title">Why Choose Us</h2>
 					</div>
-					<p>Molestie at elementum eu facilisis sed odio. Scelerisque in dictum non consectetur a erat. Aliquam id diam maecenas ultricies mi eget mauris. Ultrices sagittis orci a scelerisque purus.</p>
+					<p>Your business is unique—so are its needs. Get custom digital services from the best professionals that are mapped around your business requirements and goals. Personalized yet affordable!</p>
 					<div class="feature">
 						<i class="fa fa-check"></i>
-						<p>Quis varius quam quisque id diam vel quam elementum.</p>
+						<p>we build powerful websites.</p>
 					</div>
 					<div class="feature">
 						<i class="fa fa-check"></i>
-						<p>Mauris augue neque gravida in fermentum.</p>
+						<p>we emphasize simplicity.</p>
 					</div>
 					<div class="feature">
 						<i class="fa fa-check"></i>
-						<p>Orci phasellus egestas tellus rutrum.</p>
+						<p>we're affordable & friendly.</p>
 					</div>
 					<div class="feature">
 						<i class="fa fa-check"></i>
-						<p>Nec feugiat nisl pretium fusce id velit ut tortor pretium.</p>
+						<p>we only charge you when we do work for you.</p>
+					</div>
+					<div class="feature">
+						<i class="fa fa-check"></i>
+						<p>we're honest.</p>
 					</div>
 				</div>
 				<!-- /why choose us content -->
@@ -406,10 +510,11 @@
 				<!-- About slider -->
 				<div class="col-md-6">
 					<div id="about-slider" class="owl-carousel owl-theme">
-						<img class="img-responsive" src="./img/about1.jpg" alt="">
-						<img class="img-responsive" src="./img/about2.jpg" alt="">
-						<img class="img-responsive" src="./img/about1.jpg" alt="">
-						<img class="img-responsive" src="./img/about2.jpg" alt="">
+						
+						<img class="img-responsive choose-slide-image" src="./img/small_slide_1.jpg" alt="" style="" >
+						<img class="img-responsive choose-slide-image" src="./img/small_slide_2.jpg" alt="" style="border:1px solid #6195FF;">
+						<img class="img-responsive choose-slide-image" src="./img/small_slide_3.jpg" alt="" style="">
+						<img class="img-responsive choose-slide-image" src="./img/small_slide_4.jpg" alt="" style="">
 					</div>
 				</div>
 				<!-- /About slider -->
@@ -443,7 +548,7 @@
 				<div class="col-sm-3 col-xs-6">
 					<div class="number">
 						<i class="fa fa-users"></i>
-						<h3 class="white-text"><span class="counter">451</span></h3>
+						<h3 class="white-text"><span class="counter">79</span></h3>
 						<span class="white-text">Happy clients</span>
 					</div>
 				</div>
@@ -453,7 +558,7 @@
 				<div class="col-sm-3 col-xs-6">
 					<div class="number">
 						<i class="fa fa-trophy"></i>
-						<h3 class="white-text"><span class="counter">12</span></h3>
+						<h3 class="white-text"><span class="counter">9</span></h3>
 						<span class="white-text">Awards won</span>
 					</div>
 				</div>
@@ -473,7 +578,7 @@
 				<div class="col-sm-3 col-xs-6">
 					<div class="number">
 						<i class="fa fa-file"></i>
-						<h3 class="white-text"><span class="counter">45</span></h3>
+						<h3 class="white-text"><span class="counter">36</span></h3>
 						<span class="white-text">Projects completed</span>
 					</div>
 				</div>
@@ -488,8 +593,9 @@
 	</div>
 	<!-- /Numbers -->
 
-	<!-- Pricing -->
-	<div id="pricing" class="section md-padding">
+
+	<!-- Team -->
+	<div id="team" class="section md-padding">
 
 		<!-- Container -->
 		<div class="container">
@@ -499,101 +605,110 @@
 
 				<!-- Section header -->
 				<div class="section-header text-center">
-					<h2 class="title">Pricing Table</h2>
+					<h2 class="title">Our Platforms</h2>
 				</div>
 				<!-- /Section header -->
 
-				<!-- pricing -->
+			    <!-- Platforms -->
 				<div class="col-sm-4">
-					<div class="pricing">
-						<div class="price-head">
-							<span class="price-title">Basic plan</span>
-							<div class="price">
-								<h3>$9<span class="duration">/ month</span></h3>
-							</div>
+					<div class="pricing platforms-box" style="padding-bottom:20px;">
+						<div class="price-head" >
+							<span class="price-title platforms-title">Front Side</span>
 						</div>
-						<ul class="price-content">
+						<ul class="price-content platforms-list">
 							<li>
-								<p>1GB Disk Space</p>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;HTML</p>
 							</li>
 							<li>
-								<p>100 Email Account</p>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;CSS</p>
 							</li>
 							<li>
-								<p>24/24 Support</p>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;Javascript / jQuery</p>
+							</li>
+							<li>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;Angular Js</p>
+							</li>
+							<li>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;React Js</p>
+							</li>
+							<li>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;Knockout Js</p>
 							</li>
 						</ul>
-						<div class="price-btn">
-							<button class="outline-btn">Purchase now</button>
-						</div>
 					</div>
 				</div>
-				<!-- /pricing -->
+				<!-- /Platforms -->
+				
+				<!-- Platforms -->
+				<div class="col-sm-4">
+					<div class="pricing platforms-box" style="padding-bottom:20px;">
+						<div class="price-head" >
+							<span class="price-title platforms-title">Back Side</span>
+						</div>
+						<ul class="price-content platforms-list">
+							<li>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;PHP</p>
+							</li>
+							<li>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;Laravel Framework</p>
+							</li>
+							<li>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;Codeigniter Framework</p>
+							</li>
+							<li>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;Yii Framework</p>
+							</li>
+							<li>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;Python</p>
+							</li>
+							<li>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;API Integration</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /Platforms -->
 
-				<!-- pricing -->
+				<!-- Platforms -->
 				<div class="col-sm-4">
-					<div class="pricing">
-						<div class="price-head">
-							<span class="price-title">Silver plan</span>
-							<div class="price">
-								<h3>$19<span class="duration">/ month</span></h3>
-							</div>
+					<div class="pricing platforms-box" style="padding-bottom:20px;">
+						<div class="price-head" >
+							<span class="price-title platforms-title">Database | Hosting</span>
 						</div>
-						<ul class="price-content">
+						<ul class="price-content platforms-list">
 							<li>
-								<p>1GB Disk Space</p>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;MySQL</p>
 							</li>
 							<li>
-								<p>100 Email Account</p>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;SQL</p>
 							</li>
 							<li>
-								<p>24/24 Support</p>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;NoSQL | MongoDB</p>
+							</li>
+							<li>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;AWS</p>
+							</li>
+							<li>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;Microsoft Azure</p>
+							</li>
+							<li>
+								<p class="platform-name"><i class="fa fa-arrow-right"></i>&nbsp;Heroku</p>
 							</li>
 						</ul>
-						<div class="price-btn">
-							<button class="outline-btn">Purchase now</button>
-						</div>
 					</div>
 				</div>
-				<!-- /pricing -->
+				<!-- /Platforms -->
 
-				<!-- pricing -->
-				<div class="col-sm-4">
-					<div class="pricing">
-						<div class="price-head">
-							<span class="price-title">Gold plan</span>
-							<div class="price">
-								<h3>$39<span class="duration">/ month</span></h3>
-							</div>
-						</div>
-						<ul class="price-content">
-							<li>
-								<p>1GB Disk Space</p>
-							</li>
-							<li>
-								<p>100 Email Account</p>
-							</li>
-							<li>
-								<p>24/24 Support</p>
-							</li>
-						</ul>
-						<div class="price-btn">
-							<button class="outline-btn">Purchase now</button>
-						</div>
-					</div>
-				</div>
-				<!-- /pricing -->
 
 			</div>
-			<!-- Row -->
+			<!-- /Row -->
 
 		</div>
 		<!-- /Container -->
 
 	</div>
-	<!-- /Pricing -->
-
-
+	<!-- /Team -->
+	
 	<!-- Testimonial -->
 	<div id="testimonial" class="section md-padding">
 
@@ -608,7 +723,13 @@
 
 			<!-- Row -->
 			<div class="row">
-
+                
+				<!-- Section header -->
+				<div class="section-header text-center">
+					<h2 class="title" style="color:#6195FF;">Testimonial</h2>
+				</div>
+				<!-- /Section header -->
+				
 				<!-- Testimonial slider -->
 				<div class="col-md-10 col-md-offset-1">
 					<div id="testimonial-slider" class="owl-carousel owl-theme">
@@ -616,11 +737,11 @@
 						<!-- testimonial -->
 						<div class="testimonial">
 							<div class="testimonial-meta">
-								<img src="./img/perso1.jpg" alt="">
-								<h3 class="white-text">John Doe</h3>
-								<span>Web Designer</span>
+								<img src="./img/person3.jpg" alt="">
+								<h3 class="white-text">Ross Doe</h3>
+								<span>SALES MANAGER</span>
 							</div>
-							<p class="white-text">Molestie at elementum eu facilisis sed odio. Scelerisque in dictum non consectetur a erat. Aliquam id diam maecenas ultricies mi eget mauris.</p>
+							<p class="white-text">Fantastic work! I am just impressed by their service quality and working strategy. I hired them for the development of my online store and they have satisfied me to the full by delivering the exceptional solution. They have a great expertise, are dedicated, attentive, talented and care much about the client needs. Highly recommended.</p>
 						</div>
 						<!-- /testimonial -->
 
@@ -628,10 +749,32 @@
 						<div class="testimonial">
 							<div class="testimonial-meta">
 								<img src="./img/perso2.jpg" alt="">
-								<h3 class="white-text">John Doe</h3>
-								<span>Web Designer</span>
+								<h3 class="white-text">John Leo</h3>
+								<span>DIGITAL MARKETING CONSULTANT</span>
 							</div>
-							<p class="white-text">Molestie at elementum eu facilisis sed odio. Scelerisque in dictum non consectetur a erat. Aliquam id diam maecenas ultricies mi eget mauris.</p>
+							<p class="white-text">I gave to a redesigning job of my existing site. They left no loophole exposed in their redesigning work and created a fresh, eye-tempting design for my site. Really, the new design is very user-friendly and responsive as well! Looking forward to hire them again to design my next upcoming site..</p>
+						</div>
+						<!-- /testimonial -->
+						
+						<!-- testimonial -->
+						<div class="testimonial">
+							<div class="testimonial-meta">
+								<img src="./img/client_3.PNG" alt="">
+								<h3 class="white-text">Elisa Allen</h3>
+								<span>FASHION AND TECH BLOGGER</span>
+							</div>
+							<p class="white-text">KVN Infotech team was a great experience. Two things in particular about their service is exceptional: their speed of response to emails, they were always available to answer my questions and provide feedback as the project went along. Secondly they demonstrated a clear understanding of the scope and nature of the project and delivered accordingly</p>
+						</div>
+						<!-- /testimonial -->
+						
+						<!-- testimonial -->
+						<div class="testimonial">
+							<div class="testimonial-meta">
+								<img src="./img/no_user.PNG" alt="">
+								<h3 class="white-text">Matt Reed</h3>
+								<span>CEO, low Tech, USA</span>
+							</div>
+							<p class="white-text">KVN Infotech is a highly skilled team with an eye catching details. We got exactly what we wanted and more. The project management and communication works really well through the online project tools and the dedicated project manager made a great job keeping things together. We are looking forward to the next tasks</p>
 						</div>
 						<!-- /testimonial -->
 
@@ -648,176 +791,7 @@
 	</div>
 	<!-- /Testimonial -->
 
-	<!-- Team -->
-	<div id="team" class="section md-padding">
-
-		<!-- Container -->
-		<div class="container">
-
-			<!-- Row -->
-			<div class="row">
-
-				<!-- Section header -->
-				<div class="section-header text-center">
-					<h2 class="title">Our Team</h2>
-				</div>
-				<!-- /Section header -->
-
-				<!-- team -->
-				<div class="col-sm-4">
-					<div class="team">
-						<div class="team-img">
-							<img class="img-responsive" src="./img/team1.jpg" alt="">
-							<div class="overlay">
-								<div class="team-social">
-									<a href="#"><i class="fa fa-facebook"></i></a>
-									<a href="#"><i class="fa fa-google-plus"></i></a>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</div>
-							</div>
-						</div>
-						<div class="team-content">
-							<h3>John Doe</h3>
-							<span>Web Designer</span>
-						</div>
-					</div>
-				</div>
-				<!-- /team -->
-
-				<!-- team -->
-				<div class="col-sm-4">
-					<div class="team">
-						<div class="team-img">
-							<img class="img-responsive" src="./img/team2.jpg" alt="">
-							<div class="overlay">
-								<div class="team-social">
-									<a href="#"><i class="fa fa-facebook"></i></a>
-									<a href="#"><i class="fa fa-google-plus"></i></a>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</div>
-							</div>
-						</div>
-						<div class="team-content">
-							<h3>John Doe</h3>
-							<span>Web Designer</span>
-						</div>
-					</div>
-				</div>
-				<!-- /team -->
-
-				<!-- team -->
-				<div class="col-sm-4">
-					<div class="team">
-						<div class="team-img">
-							<img class="img-responsive" src="./img/team3.jpg" alt="">
-							<div class="overlay">
-								<div class="team-social">
-									<a href="#"><i class="fa fa-facebook"></i></a>
-									<a href="#"><i class="fa fa-google-plus"></i></a>
-									<a href="#"><i class="fa fa-twitter"></i></a>
-								</div>
-							</div>
-						</div>
-						<div class="team-content">
-							<h3>John Doe</h3>
-							<span>Web Designer</span>
-						</div>
-					</div>
-				</div>
-				<!-- /team -->
-
-			</div>
-			<!-- /Row -->
-
-		</div>
-		<!-- /Container -->
-
-	</div>
-	<!-- /Team -->
-
-	<!-- Blog -->
-	<div id="blog" class="section md-padding bg-grey">
-
-		<!-- Container -->
-		<div class="container">
-
-			<!-- Row -->
-			<div class="row">
-
-				<!-- Section header -->
-				<div class="section-header text-center">
-					<h2 class="title">Recents news</h2>
-				</div>
-				<!-- /Section header -->
-
-				<!-- blog -->
-				<div class="col-md-4">
-					<div class="blog">
-						<div class="blog-img">
-							<img class="img-responsive" src="./img/blog1.jpg" alt="">
-						</div>
-						<div class="blog-content">
-							<ul class="blog-meta">
-								<li><i class="fa fa-user"></i>John doe</li>
-								<li><i class="fa fa-clock-o"></i>18 Oct</li>
-								<li><i class="fa fa-comments"></i>57</li>
-							</ul>
-							<h3>Molestie at elementum eu facilisis sed odio</h3>
-							<p>Nec feugiat nisl pretium fusce id velit ut tortor pretium. Nisl purus in mollis nunc sed. Nunc non blandit massa enim nec.</p>
-							<a href="blog-single.html">Read more</a>
-						</div>
-					</div>
-				</div>
-				<!-- /blog -->
-
-				<!-- blog -->
-				<div class="col-md-4">
-					<div class="blog">
-						<div class="blog-img">
-							<img class="img-responsive" src="./img/blog2.jpg" alt="">
-						</div>
-						<div class="blog-content">
-							<ul class="blog-meta">
-								<li><i class="fa fa-user"></i>John doe</li>
-								<li><i class="fa fa-clock-o"></i>18 Oct</li>
-								<li><i class="fa fa-comments"></i>57</li>
-							</ul>
-							<h3>Molestie at elementum eu facilisis sed odio</h3>
-							<p>Nec feugiat nisl pretium fusce id velit ut tortor pretium. Nisl purus in mollis nunc sed. Nunc non blandit massa enim nec.</p>
-							<a href="blog-single.html">Read more</a>
-						</div>
-					</div>
-				</div>
-				<!-- /blog -->
-
-				<!-- blog -->
-				<div class="col-md-4">
-					<div class="blog">
-						<div class="blog-img">
-							<img class="img-responsive"  src="./img/blog3.jpg" alt="">
-						</div>
-						<div class="blog-content">
-							<ul class="blog-meta">
-								<li><i class="fa fa-user"></i>John doe</li>
-								<li><i class="fa fa-clock-o"></i>18 Oct</li>
-								<li><i class="fa fa-comments"></i>57</li>
-							</ul>
-							<h3>Molestie at elementum eu facilisis sed odio</h3>
-							<p>Nec feugiat nisl pretium fusce id velit ut tortor pretium. Nisl purus in mollis nunc sed. Nunc non blandit massa enim nec.</p>
-							<a href="blog-single.html">Read more</a>
-						</div>
-					</div>
-				</div>
-				<!-- /blog -->
-
-			</div>
-			<!-- /Row -->
-
-		</div>
-		<!-- /Container -->
-
-	</div>
-	<!-- /Blog -->
+	
 
 	<!-- Contact -->
 	<div id="contact" class="section md-padding">
@@ -835,43 +809,44 @@
 				<!-- /Section-header -->
 
 				<!-- contact -->
+				<!--
 				<div class="col-sm-4">
 					<div class="contact">
 						<i class="fa fa-phone"></i>
 						<h3>Phone</h3>
 						<p>512-421-3940</p>
 					</div>
-				</div>
+				</div> -->
 				<!-- /contact -->
 
 				<!-- contact -->
-				<div class="col-sm-4">
+				<div class="col-sm-6">
 					<div class="contact">
 						<i class="fa fa-envelope"></i>
 						<h3>Email</h3>
-						<p>email@support.com</p>
+						<p>infokvndata@gmail.com</p>
 					</div>
 				</div>
 				<!-- /contact -->
 
 				<!-- contact -->
-				<div class="col-sm-4">
+				<div class="col-sm-6">
 					<div class="contact">
 						<i class="fa fa-map-marker"></i>
 						<h3>Address</h3>
-						<p>1739 Bubby Drive</p>
+						<p>University Road</p>
 					</div>
 				</div>
 				<!-- /contact -->
 
 				<!-- contact form -->
-				<div class="col-md-8 col-md-offset-2">
+				<div class="col-md-8 col-md-offset-2" >
 					<form class="contact-form">
-						<input type="text" class="input" placeholder="Name">
-						<input type="email" class="input" placeholder="Email">
-						<input type="text" class="input" placeholder="Subject">
-						<textarea class="input" placeholder="Message"></textarea>
-						<button class="main-btn">Send message</button>
+						<input type="text" class="input" placeholder="Name" name="name" required>
+						<input type="email" class="input" placeholder="Email" name="user_email" required>
+						<input type="text" class="input" placeholder="Subject" name="sub" required>
+						<textarea class="input" placeholder="Message" name="msg" required> </textarea>
+						<button type="submit" class="main-btn">Send message</button>
 					</form>
 				</div>
 				<!-- /contact form -->
@@ -898,12 +873,18 @@
 				<div class="col-md-12">
 
 					<!-- footer logo -->
-					<div class="footer-logo">
-						<a href="index.html"><img src="img/logo-alt.png" alt="logo"></a>
+					<div class="footer-logo" style="width:222px;margin:0 auto;">
+					  <a href="" style="font-size:30px;">
+						  <!-- <img class="logo" src="img/earth-png.png" alt="logo" style="width:23px;margin-top: -4px;margin-right: 5px;" /> -->
+							<div style="float:left;"><i class="fa fa-globe" style="margin-top:-2px;font-size: 23px;margin-right:5px;"></i></div>
+							<div style="float:left;margin-top:3px;">KVN Infotech</div>
+							<div style="clear:both;"></div>
+					  </a>
 					</div>
 					<!-- /footer logo -->
 
 					<!-- footer follow -->
+					<!--
 					<ul class="footer-follow">
 						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -912,6 +893,7 @@
 						<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 						<li><a href="#"><i class="fa fa-youtube"></i></a></li>
 					</ul>
+					-->
 					<!-- /footer follow -->
 
 					<!-- footer copyright -->
@@ -945,8 +927,32 @@
 		</div>
 	</div>
 	<!-- /Preloader -->
+<script>
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  slides[slideIndex-1].style.display = "block";  
+ }
+</script>
 
 	<!-- jQuery Plugins -->
+	
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/owl.carousel.min.js"></script>
